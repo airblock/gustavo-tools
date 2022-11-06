@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 public interface Catalog<T extends Object, K extends BizContext> {
 
-    void addChain(T name, Chain<K> chain);
+    void addChain(T key, Chain<K> chain);
 
-    Chain<K> getChain(T name);
+    Chain<K> getChain(T key);
 
     Iterator<T> getNames();
 }

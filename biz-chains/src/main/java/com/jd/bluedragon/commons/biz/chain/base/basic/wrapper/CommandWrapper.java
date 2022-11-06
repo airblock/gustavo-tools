@@ -14,8 +14,6 @@ public abstract class CommandWrapper<T extends BizContext> implements Command<T>
         return doExecute(context);
     }
 
-    protected abstract boolean doSupport(T context);
-
     protected abstract void processBefore(T context);
 
     protected abstract boolean doExecute(T context) throws Exception;

@@ -18,7 +18,6 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
         while (elements.hasNext()) {
             addCommand(elements.next());
         }
-
     }
 
     protected Command[] commands = new Command[0];
@@ -35,6 +34,7 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
      *                                  is <code>null</code>
      * @throws IllegalStateException    if no further configuration is allowed
      */
+    @Override
     public void addCommand(Command command) {
 
         if (command == null) {

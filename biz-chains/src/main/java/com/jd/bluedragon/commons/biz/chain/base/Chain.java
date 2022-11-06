@@ -5,7 +5,6 @@ public interface Chain<T extends BizContext> extends Command<T> {
 
     void addCommand(Command<T> command);
 
-
     boolean execute(T context) throws Exception;
 
 
