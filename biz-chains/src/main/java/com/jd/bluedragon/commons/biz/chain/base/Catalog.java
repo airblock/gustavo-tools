@@ -2,7 +2,7 @@ package com.jd.bluedragon.commons.biz.chain.base;
 
 import java.util.Iterator;
 
-public interface Catalog<T extends Object, K extends BizContext> {
+public interface Catalog<T extends Object, K extends KeyedContext> {
 
     void addChain(T key, Chain<K> chain);
 

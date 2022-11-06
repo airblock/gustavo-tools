@@ -1,7 +1,7 @@
 package com.jd.bluedragon.commons.biz.chain.base;
 
 
-public interface Chain<T extends BizContext> extends Command<T> {
+public interface Chain<T extends KeyedContext> extends Command<T> {
 
     void addCommand(Command<T> command);
 

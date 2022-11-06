@@ -4,12 +4,12 @@ package com.jd.bluedragon.commons.biz.chain.base;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public interface Command<T extends BizContext> {
+public interface Command<T extends KeyedContext> {
 
-    Map<String, Command<BizContext>> commandMapper
+    Map<String, Command<KeyedContext>> commandMapper
             = new ConcurrentHashMap<>();
 
-    default void markCommand(String key, Command<BizContext> command) {
+    default void markCommand(String key, Command<KeyedContext> command) {
         synchronized (commandMapper) {
             if (!commandMapper.containsKey(key)) {
                 commandMapper.put(key, command);
@@ -17,15 +17,9 @@ public interface Command<T extends BizContext> {
         }
     }
 
-    default boolean postprocess(T context){
-        return true;
-    }
-
-    default boolean doSupport(T context){
+    default boolean postprocess(T context, Exception saveException){
         return true;
     }
 
     boolean execute(T context) throws Exception;
-
-
 }

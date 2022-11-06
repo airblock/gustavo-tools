@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class ChainBase<T extends BizContext> implements Chain<T> {
+public class ChainBase<T extends KeyedContext> implements Chain<T> {
 
     public ChainBase(List<CommandWrapper<T>> commands) {
 
@@ -21,8 +21,6 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
     }
 
     protected Command[] commands = new Command[0];
-
-    protected boolean frozen = false;
 
     // ---------------------------------------------------------- Chain Methods
 
@@ -40,9 +38,7 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
         if (command == null) {
             throw new IllegalArgumentException();
         }
-        if (frozen) {
-            throw new IllegalStateException();
-        }
+
         Command[] results = new Command[commands.length + 1];
         System.arraycopy(commands, 0, results, 0, commands.length);
         results[commands.length] = command;
@@ -57,9 +53,6 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
             throw new IllegalArgumentException();
         }
 
-        // Freeze the configuration of the command list
-        frozen = true;
-
         // Execute the commands in this list until one returns true
         // or throws an exception
         boolean saveResult = false;
@@ -69,7 +62,7 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
         for (i = 0; i < n; i++) {
             try {
                 saveResult = commands[i].execute(context);
-                if (saveResult) {
+                if (!saveResult) {
                     break;
                 }
             } catch (Exception e) {
@@ -85,18 +78,17 @@ public class ChainBase<T extends BizContext> implements Chain<T> {
         boolean handled = false;
         boolean result = false;
         for (int j = i; j >= 0; j--) {
-            if (commands[j] instanceof Filter) {
+
                 try {
                     result =
-                            ((Filter<T>) commands[j]).postprocess(context,
+                            commands[j].postprocess(context,
                                     saveException);
-                    if (result) {
+                    if (!result) {
                         handled = true;
                     }
                 } catch (Exception e) {
                     // Silently ignore
                 }
-            }
         }
 
         // Return the exception or result state from the last execute()

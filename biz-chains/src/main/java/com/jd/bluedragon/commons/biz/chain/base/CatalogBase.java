@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CatalogBase<T, K extends BizContext> implements Catalog<T, K> {
+import static java.util.Optional.ofNullable;
+
+public class CatalogBase<T, K extends KeyedContext> implements Catalog<T, K> {
 
     // ----------------------------------------------------- Instance Variables
 
@@ -27,6 +29,14 @@ public class CatalogBase<T, K extends BizContext> implements Catalog<T, K> {
 
     public Chain<K> getChain(T name) {
         return chains.get(name);
+    }
+
+    public boolean execute(K context) throws Exception {
+        if (!chains.containsKey(context.key())) {
+            throw new UnsupportedOperationException("no chain definition of "+ context.key());
+        }
+
+        return chains.get(context.key()).execute(context);
     }
 
     public Iterator<T> getNames() {
