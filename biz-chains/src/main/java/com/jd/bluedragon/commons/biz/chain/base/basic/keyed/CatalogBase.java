@@ -19,10 +19,6 @@ public class CatalogBase<T, K extends KeyedContext> implements Catalog<T, K> {
     public CatalogBase() {
     }
 
-    public CatalogBase(Map<T, Chain<K>> chains) {
-        this.chains = Collections.synchronizedMap(chains);
-    }
-
     // --------------------------------------------------------- Public Methods
     public void addChain(T name, Chain<K> chain) {
         chains.put(name, chain);

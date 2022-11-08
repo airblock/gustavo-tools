@@ -7,5 +7,4 @@ public interface Chain<T extends Context> extends Command<T> {
 
     boolean execute(T context) throws Exception;
 
-
 }
