@@ -1,9 +1,9 @@
 package com.jd.bluedragon.commons.biz.chain.base;
 
 
-public interface Chain<T extends KeyedContext> extends Command<T> {
+public interface Chain<T extends Context> extends Command<T> {
 
-    void addCommand(Command<T> command);
+    void addCommand(Command command);
 
     boolean execute(T context) throws Exception;
 

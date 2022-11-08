@@ -4,12 +4,12 @@ package com.jd.bluedragon.commons.biz.chain.base;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public interface Command<T extends KeyedContext> {
+public interface Command<T extends Context> {
 
-    Map<String, Command<KeyedContext>> commandMapper
+    Map<String, Command> commandMapper
             = new ConcurrentHashMap<>();
 
-    default void markCommand(String key, Command<KeyedContext> command) {
+    default void markCommand(String key, Command<T> command) {
         synchronized (commandMapper) {
             if (!commandMapper.containsKey(key)) {
                 commandMapper.put(key, command);

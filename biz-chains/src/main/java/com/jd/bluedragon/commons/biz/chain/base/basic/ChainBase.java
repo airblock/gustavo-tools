@@ -1,7 +1,11 @@
-package com.jd.bluedragon.commons.biz.chain.base;
+package com.jd.bluedragon.commons.biz.chain.base.basic;
 
 
-import com.jd.bluedragon.commons.biz.chain.base.basic.wrapper.CommandWrapper;
+import com.jd.bluedragon.commons.biz.chain.base.Chain;
+import com.jd.bluedragon.commons.biz.chain.base.Command;
+import com.jd.bluedragon.commons.biz.chain.base.Context;
+import com.jd.bluedragon.commons.biz.chain.base.basic.keyed.KeyedCommand;
+import com.jd.bluedragon.commons.biz.chain.base.basic.keyed.KeyedContext;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,12 +13,12 @@ import java.util.List;
 
 public class ChainBase<T extends KeyedContext> implements Chain<T> {
 
-    public ChainBase(List<CommandWrapper<T>> commands) {
+    public ChainBase(List<KeyedCommand<T>> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator<CommandWrapper<T>> elements = commands.iterator();
+        Iterator<KeyedCommand<T>> elements = commands.iterator();
         while (elements.hasNext()) {
             addCommand(elements.next());
         }

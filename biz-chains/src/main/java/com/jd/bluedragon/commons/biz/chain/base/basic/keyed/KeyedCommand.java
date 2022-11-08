@@ -1,12 +1,17 @@
-package com.jd.bluedragon.commons.biz.chain.base.basic.wrapper;
+package com.jd.bluedragon.commons.biz.chain.base.basic.keyed;
 
-import com.jd.bluedragon.commons.biz.chain.base.KeyedContext;
-import com.jd.bluedragon.commons.biz.chain.base.Command;
+import com.jd.bluedragon.commons.biz.chain.base.basic.AbstractCommand;
 
-public abstract class CommandWrapper<T extends KeyedContext> implements Command<T> {
+public abstract class KeyedCommand<T extends KeyedContext> extends AbstractCommand<T> {
+
+
+    public KeyedCommand(String name) {
+        super(name);
+    }
+
     @Override
     public boolean postprocess(T context, Exception saveException) {
-        return Command.super.postprocess(context, saveException);
+        return true;
     }
 
     @Override
@@ -14,7 +19,6 @@ public abstract class CommandWrapper<T extends KeyedContext> implements Command<
         if (!doSupport(context)) {
             return false;
         }
-        processBefore(context);
         return doExecute(context);
     }
 
@@ -22,7 +26,6 @@ public abstract class CommandWrapper<T extends KeyedContext> implements Command<
         return true;
     }
 
-    protected abstract void processBefore(T context);
 
     protected abstract boolean doExecute(T context) throws Exception;
 }
