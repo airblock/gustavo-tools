@@ -1,9 +1,9 @@
 package com.airblock.commons.biz.chain.base;
 
 
-public interface Chain<T extends Context> extends CacheableCommand<T> {
+public interface Chain<T extends Context> extends Command<T> {
 
-    void addCommand(CacheableCommand command);
+    void addCommand(Command command);
 
     boolean execute(T context) throws Exception;
 

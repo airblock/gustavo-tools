@@ -3,26 +3,27 @@ package com.airblock.commons.biz.chain.base.basic;
 
 import com.airblock.commons.biz.chain.base.CacheableCommand;
 import com.airblock.commons.biz.chain.base.Chain;
+import com.airblock.commons.biz.chain.base.Command;
 import com.airblock.commons.biz.chain.base.Context;
 
 import java.util.Iterator;
 import java.util.List;
 
 
-public class ChainBase<T extends Context> implements Chain<T> {
+public class ChainBase<T extends Context, C extends Command<T>> implements Chain<T> {
 
-    public ChainBase(List<CacheableCommand> commands) {
+    public ChainBase(List<C> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator<CacheableCommand> elements = commands.iterator();
+        Iterator<C> elements = commands.iterator();
         while (elements.hasNext()) {
             addCommand(elements.next());
         }
     }
 
-    protected CacheableCommand[] commands = new CacheableCommand[0];
+    protected Command[] commands = new Command[0];
 
     // ---------------------------------------------------------- Chain Methods
 
@@ -35,13 +36,13 @@ public class ChainBase<T extends Context> implements Chain<T> {
      * @throws IllegalStateException    if no further configuration is allowed
      */
     @Override
-    public void addCommand(CacheableCommand command) {
+    public void addCommand(Command command) {
 
         if (command == null) {
             throw new IllegalArgumentException();
         }
 
-        CacheableCommand[] results = new CacheableCommand[commands.length + 1];
+        Command[] results = new Command[commands.length + 1];
         System.arraycopy(commands, 0, results, 0, commands.length);
         results[commands.length] = command;
         commands = results;
