@@ -1,6 +1,6 @@
 package com.airblock.commons.biz.chain.base.basic.keyed;
 
-import com.airblock.commons.biz.chain.base.CacheableCommand;
+import com.airblock.commons.biz.chain.base.basic.CacheableCommand;
 import com.airblock.commons.biz.chain.base.Catalog;
 import com.airblock.commons.biz.chain.base.CatalogResolver;
 import com.alibaba.fastjson.JSONObject;

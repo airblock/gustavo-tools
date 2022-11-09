@@ -1,5 +1,8 @@
-package com.airblock.commons.biz.chain.base;
+package com.airblock.commons.biz.chain.base.basic;
 
+
+import com.airblock.commons.biz.chain.base.Command;
+import com.airblock.commons.biz.chain.base.Context;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

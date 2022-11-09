@@ -1,7 +1,6 @@
 package com.airblock.commons.biz.chain.base.basic;
 
 
-import com.airblock.commons.biz.chain.base.CacheableCommand;
 import com.airblock.commons.biz.chain.base.Chain;
 import com.airblock.commons.biz.chain.base.Command;
 import com.airblock.commons.biz.chain.base.Context;
