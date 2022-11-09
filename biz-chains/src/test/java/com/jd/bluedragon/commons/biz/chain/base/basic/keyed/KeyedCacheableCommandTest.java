@@ -6,15 +6,15 @@ import com.jd.bluedragon.commons.biz.chain.base.Chain;
 import org.junit.Before;
 import org.junit.Test;
 
-public class KeyedCommandTest {
+public class KeyedCacheableCommandTest {
 
     final GenericJsonConfigKeyedCatalogResolver genericJsonConfigKeyedCatalogResolver = new GenericJsonConfigKeyedCatalogResolver();
 
     @Before
     public void before() {
-        new WaybillSignKeyedCommand1("command1");
-        new WaybillSignKeyedCommand2("command2");
-        new WaybillSignKeyedCommand2("command3");
+        new WaybillSignKeyedCacheableCommand1("command1");
+        new WaybillSignKeyedCacheableCommand2("command2");
+        new WaybillSignKeyedCacheableCommand2("command3");
     }
 
     /**
@@ -22,7 +22,7 @@ public class KeyedCommandTest {
      */
     @Test
     public void test1() throws Exception {
-        String jsonConfig = "{\"fba\":[\"command1\",\"command3\"]}";
+        String jsonConfig = "{\"kejie\":[\"command2\"], \"fba\":[\"command1\", \"command3\"]}";
         Catalog<String, KeyedContext> catalogByWaybillSign = genericJsonConfigKeyedCatalogResolver.resolve(jsonConfig);
 
         WaybillSignKeyedContext waybillSignKeyedContext = new WaybillSignKeyedContext(WaybillSign.FBA);

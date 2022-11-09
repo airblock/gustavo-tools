@@ -16,8 +16,8 @@ public class GenericJsonConfigKeyedCatalogResolver implements CatalogResolver<St
                 = JSONObject.parseObject(config, new TypeReference<Map<String, List<String>>>() {});
         CatalogBase<String, KeyedContext> catalogBase = new CatalogBase();
         catalogMap.entrySet().stream().forEach(stringListEntry -> {
-            List<Command> collect
-                    = stringListEntry.getValue().stream().map(Command.commandMapper::get).collect(Collectors.toList());
+            List<CacheableCommand> collect
+                    = stringListEntry.getValue().stream().map(CacheableCommand.commandMapper::get).collect(Collectors.toList());
             catalogBase.addChain(stringListEntry.getKey()
                     , new ChainBase<>(collect));
         });

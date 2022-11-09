@@ -2,7 +2,7 @@ package com.jd.bluedragon.commons.biz.chain.base.basic;
 
 
 import com.jd.bluedragon.commons.biz.chain.base.Chain;
-import com.jd.bluedragon.commons.biz.chain.base.Command;
+import com.jd.bluedragon.commons.biz.chain.base.CacheableCommand;
 import com.jd.bluedragon.commons.biz.chain.base.Context;
 
 import java.util.Iterator;
@@ -11,37 +11,37 @@ import java.util.List;
 
 public class ChainBase<T extends Context> implements Chain<T> {
 
-    public ChainBase(List<Command> commands) {
+    public ChainBase(List<CacheableCommand> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator<Command> elements = commands.iterator();
+        Iterator<CacheableCommand> elements = commands.iterator();
         while (elements.hasNext()) {
             addCommand(elements.next());
         }
     }
 
-    protected Command[] commands = new Command[0];
+    protected CacheableCommand[] commands = new CacheableCommand[0];
 
     // ---------------------------------------------------------- Chain Methods
 
     /**
      * See the {@link Chain} JavaDoc.
      *
-     * @param command The {@link Command} to be added
+     * @param command The {@link CacheableCommand} to be added
      * @throws IllegalArgumentException if <code>command</code>
      *                                  is <code>null</code>
      * @throws IllegalStateException    if no further configuration is allowed
      */
     @Override
-    public void addCommand(Command command) {
+    public void addCommand(CacheableCommand command) {
 
         if (command == null) {
             throw new IllegalArgumentException();
         }
 
-        Command[] results = new Command[commands.length + 1];
+        CacheableCommand[] results = new CacheableCommand[commands.length + 1];
         System.arraycopy(commands, 0, results, 0, commands.length);
         results[commands.length] = command;
         commands = results;

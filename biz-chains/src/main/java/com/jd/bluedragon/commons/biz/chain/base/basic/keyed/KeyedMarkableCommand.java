@@ -1,11 +1,11 @@
 package com.jd.bluedragon.commons.biz.chain.base.basic.keyed;
 
-import com.jd.bluedragon.commons.biz.chain.base.basic.AbstractCommand;
+import com.jd.bluedragon.commons.biz.chain.base.basic.AbstractMarkableCommand;
 
-public abstract class KeyedCommand<T extends KeyedContext> extends AbstractCommand<T> {
+public abstract class KeyedMarkableCommand<T extends KeyedContext> extends AbstractMarkableCommand<T> {
 
 
-    public KeyedCommand(String name) {
+    public KeyedMarkableCommand(String name) {
         super(name);
     }
 
