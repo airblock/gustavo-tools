@@ -3,6 +3,7 @@ package com.jd.bluedragon.commons.biz.chain.base.basic.keyed;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.jd.bluedragon.commons.biz.chain.base.*;
+import com.jd.bluedragon.commons.biz.chain.base.basic.CatalogBase;
 import com.jd.bluedragon.commons.biz.chain.base.basic.ChainBase;
 
 import java.util.List;

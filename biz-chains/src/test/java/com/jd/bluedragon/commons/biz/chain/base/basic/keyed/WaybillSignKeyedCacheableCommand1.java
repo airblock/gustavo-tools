@@ -1,6 +1,6 @@
 package com.jd.bluedragon.commons.biz.chain.base.basic.keyed;
 
-public class WaybillSignKeyedCacheableCommand1 extends KeyedMarkableCommand<WaybillSignKeyedContext> {
+public class WaybillSignKeyedCacheableCommand1 extends KeyedCacheableCommand<WaybillSignKeyedContext> {
 
     public WaybillSignKeyedCacheableCommand1(String name) {
         super(name);

@@ -1,16 +1,15 @@
-package com.jd.bluedragon.commons.biz.chain.base.basic.keyed;
+package com.jd.bluedragon.commons.biz.chain.base.basic;
 
 import com.jd.bluedragon.commons.biz.chain.base.Catalog;
 import com.jd.bluedragon.commons.biz.chain.base.Chain;
+import com.jd.bluedragon.commons.biz.chain.base.Context;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CatalogBase<T, K extends KeyedContext> implements Catalog<T, K> {
-
-    // ----------------------------------------------------- Instance Variables
+public class CatalogBase<T, K extends Context> implements Catalog<T, K> {
 
     protected Map<T, Chain<K>> chains = Collections.synchronizedMap(new HashMap());
 
@@ -26,14 +25,6 @@ public class CatalogBase<T, K extends KeyedContext> implements Catalog<T, K> {
 
     public Chain<K> getChain(T name) {
         return chains.get(name);
-    }
-
-    public boolean execute(K context) throws Exception {
-        if (!chains.containsKey(context.key())) {
-            throw new UnsupportedOperationException("no chain definition of "+ context.key());
-        }
-
-        return chains.get(context.key()).execute(context);
     }
 
     public Iterator<T> getNames() {
