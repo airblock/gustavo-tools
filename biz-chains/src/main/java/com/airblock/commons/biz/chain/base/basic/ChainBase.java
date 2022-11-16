@@ -49,14 +49,9 @@ public class ChainBase<T extends Context, C extends Command<T>> implements Chain
     }
 
     public boolean execute(T context) throws Exception {
-
-        // Verify our parameters
         if (context == null) {
             throw new IllegalArgumentException();
         }
-
-        // Execute the commands in this list until one returns true
-        // or throws an exception
         boolean saveResult = false;
         Exception saveException = null;
         int i = 0;
@@ -72,36 +67,26 @@ public class ChainBase<T extends Context, C extends Command<T>> implements Chain
                 break;
             }
         }
-
-        // Call postprocess methods on Filters in reverse order
-        if (i >= n) { // Fell off the end of the chain
+        if (i >= n) {
             i--;
         }
         boolean handled = false;
         boolean result = false;
         for (int j = i; j >= 0; j--) {
-
-                try {
-                    result =
-                            commands[j].postprocess(context,
-                                    saveException);
-                    if (!result) {
-                        handled = true;
-                    }
-                } catch (Exception e) {
-                    // Silently ignore
+            try {
+                result = commands[j].postprocess(context, saveException);
+                if (!result) {
+                    handled = true;
                 }
+            } catch (Exception e) {
+                // Silently ignore
+            }
         }
-
         // Return the exception or result state from the last execute()
         if ((saveException != null) && !handled) {
             throw saveException;
         } else {
             return (saveResult);
         }
-
     }
-
-
 }
-

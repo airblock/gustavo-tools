@@ -24,8 +24,6 @@ public class GenericJsonConfigKeyedCatalogResolver implements CatalogResolver<St
             catalogBase.addChain(stringListEntry.getKey()
                     , new ChainBase<>(collect));
         });
-
         return catalogBase;
-
     }
 }
